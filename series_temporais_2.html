@@ -163,7 +163,7 @@
 <h1><strong>Técnicas de Forecasting para Séries Temporais</strong><a class="headerlink" href="#tecnicas-de-forecasting-para-series-temporais" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <p><strong>Quanto mais no futuro você tentar ver algo, menor será sua capacidade de inferir algo. Bem-vindo ao mundo real.</strong></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title</span>
 <span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
@@ -259,7 +259,7 @@
 <h1>1.   <strong>Técnicas de Forecasting para Séries Temporais</strong><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>No “Modelo Ingênuo”, a previsão de <span class="math notranslate nohighlight">\(P_{T+1}\)</span> é apenas uma mera observação do período imediatamente anterior (<span class="math notranslate nohighlight">\(P_T\)</span>).</p>
 <p>Pense, qual seria o melhor chute para você dizer quanto viria a conta de celular no próximo mês?!</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># dividir entre treino e validação</span>
 <span class="n">train</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="s1">&#39;2012-8-1&#39;</span><span class="p">]</span>
@@ -271,7 +271,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># copiar o último valor do dataset train e atribuir à h_hat[&#39;naive&#39;]</span>
 <span class="n">y_hat</span><span class="p">[</span><span class="s1">&#39;naive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -312,7 +312,7 @@
 <p>Se no Método Naive nós consideramos apenas o último valor disponível, as médias móveis permitem utilizarmos uma janela de intervalo.</p>
 <p>Médias móveis são excelentes para suavizar curvas (e diminuir a dispersão/ruído) ou mesmo para criar novas variáveis (feature engineering).</p>
 <p>Voltando ao exemplo da sua conta de celular, usando médias móveis nós poderíamos usar (por exemplo) as 7 últimas faturas e prever as demais.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># calcular a média dos últimos 7 valores disponíveis</span>
 <span class="n">y_hat</span><span class="p">[</span><span class="s1">&#39;m7&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">Value</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -352,7 +352,7 @@
 <h1>3.   <strong>Holt’s Linear Trend Model</strong><a class="headerlink" href="#holt-s-linear-trend-model" title="Permalink to this headline">¶</a></h1>
 <p>Qual o problema das técnicas acima? Elas não permitem que trabalhemos com tendências (apenas o nível das séries).</p>
 <p>Já o Holt’s Linear Trend Model leva em consideração tanto o nível quanto a tendência, e tende a obter melhores resultados que as técnicas mencionadas anteriormente.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># importar pacotes necessários</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
@@ -361,7 +361,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># salvar os componentes da *time series* na variável results</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
@@ -379,7 +379,7 @@
 <div class="cell_output docutils container">
 <img alt="_images/series_temporais_2_15_0.svg" src="_images/series_temporais_2_15_0.svg" /></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># salvar os valores para o dataset valid usando Holt&#39;s</span>
 <span class="n">y_hat</span><span class="p">[</span><span class="s1">&#39;holt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Holt</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">Value</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>

@@ -177,7 +177,7 @@
 <li><p>A Hipótese Nula (<span class="math notranslate nohighlight">\(H_0\)</span>) do teste é que a ST não é estacionária. Ou seja, possui algum tipo de dependência em relação ao tempo.</p></li>
 <li><p>A Hipótese Alternativa (<span class="math notranslate nohighlight">\(H_1\)</span>) rejeita a hipótese nula, ou seja, que a ST é estacionária.</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title</span>
 <span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
@@ -186,7 +186,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># importar pacotes e setar configurações de plots</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -244,7 +244,7 @@ Valores Críticos:
 <p><strong>Transformando um série temporal em estacionária</strong></p>
 <p>Para transformar uma ST em estacionária, precisamos remover a tendência e a sazonalidade que há nos dados originais. Para isso, existem diversas técnicas que podem ser usadas.</p>
 <p>Uma bom começo é aplicar o <span class="math notranslate nohighlight">\(log\)</span> a fim de reduzirmos a magnitude dos valores da ST. Na sequência, subtraímos a média móvel de um determinado período em relação ao <span class="math notranslate nohighlight">\(log\)</span> da TS.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ver o plot original</span>
 <span class="n">ma</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -259,7 +259,7 @@ Valores Críticos:
 <div class="cell_output docutils container">
 <img alt="_images/series_temporais_3_9_0.svg" src="_images/series_temporais_3_9_0.svg" /></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># aplicar log</span>
 <span class="n">df_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -275,7 +275,7 @@ Valores Críticos:
 <div class="cell_output docutils container">
 <img alt="_images/series_temporais_3_10_0.svg" src="_images/series_temporais_3_10_0.svg" /></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># subtrair a média do log dos dados</span>
 <span class="n">df_sub</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_log</span> <span class="o">-</span> <span class="n">ma_log</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
@@ -376,7 +376,7 @@ Valores Críticos:
 <p>MA: Moving Average, pois usa a dependência entre uma observação e o erro residual proveniente de uma média móvel aplicada a lagged observations.</p>
 <p>Cada um desses componentes são representados por um parâmetro do modelo. Por esse fato, é muito comum ver a notação <span class="math notranslate nohighlight">\(ARIMA(p, d, q)\)</span>.</p>
 <p>Para encontrar os parâmetros otimizados de p, d, e q, usaremos as funções ACF (Autocorrelação) e PACF (Autocorrelação Parcial).</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># melhores parâmetros para o nosso modelo</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">acf</span><span class="p">,</span> <span class="n">pacf</span>
@@ -395,7 +395,7 @@ Valores Críticos:
 </div>
 </div>
 <p>Além de plotar os gráficos para ACF e PACF, vamos plotar os limites críticos. Ou seja, 5% da autocorrelação (parcial) para ST estacionárias, <span class="math notranslate nohighlight">\(1.96 / \sqrt{(N - d)}\)</span>, onde <span class="math notranslate nohighlight">\(N\)</span> é o número de pontos do dataset e <span class="math notranslate nohighlight">\(d\)</span> é o número de vezes que diferenciamos os dados.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotar ACR e PACF</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lag_acf</span><span class="p">)</span>
@@ -423,7 +423,7 @@ Valores Críticos:
 <li><p><strong>p</strong>: valor onde o PACF cruza o limite superor do intervalo de confiança pela primeira vez.</p></li>
 </ul>
 <p>Vamos agora construir o modelo ARIMA.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># treinar o modelo ARIMA</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.arima_model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
@@ -442,7 +442,7 @@ Valores Críticos:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start=&quot;2018-02-01&quot;, end=&quot;2019-01-01&quot;</span>
 <span class="n">result_AR</span><span class="o">.</span><span class="n">plot_predict</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">&quot;2018-02-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2019-01-01&quot;</span><span class="p">);</span>
