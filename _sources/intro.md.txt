@@ -1,7 +1,24 @@
-Welcome to your Jupyter Book
+Introdução
 ============================
 
-This is a small sample book to give you a feel for how book content is
-structured.
+Nos últimos dias, além de muito trabalho (quem está trabalhando em home office vai me entender), iniciei os estudos de SÉRIES TEMPORAIS e resolvi implementar, em python, desde a análise exploratória dos dados, passando por técnicas de forecasting, testes estatísticos (Teste de Dickey-Fuller, por exemplo) e a construção do modelo ARIMA.
 
-Check out the content pages bundled with this sample book to get started.
+
+**Redes Sociais**
+
+[GitHub](https://github.com/saulomaia)
+
+[Linkedin](https://www.linkedin.com/in/saulommaia/)
+
+**Notas**
+
+```{Note}
+Se você não quer receber críticas, por favor não tente nada novo !
+
+Jeff Bezos
+```
+
+
+
+
+
