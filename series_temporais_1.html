@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Como importar Time Series em Python &#8212; Time Series</title>
+    <title>O QUE SÃO SÉRIES TEMPORAIS ? &#8212; Time Series</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -70,7 +70,7 @@
     <a href="intro.html">Introdução</a>
   </li>
   <li class="active">
-    <a href="">Como importar Time Series em Python</a>
+    <a href="">O QUE SÃO SÉRIES TEMPORAIS ?</a>
   </li>
   <li class="">
     <a href="series_temporais_2.html">Técnicas de Forecasting para Séries Temporais</a>
@@ -143,9 +143,20 @@
         
     </div>
     <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#por-que-sao-diferentes-de-outros-problemas-de-data-science" class="nav-link">POR QUE SÃO DIFERENTES DE OUTROS PROBLEMAS DE DATA SCIENCE ?</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#quais-sao-os-objetivos" class="nav-link">QUAIS SÃO OS OBJETIVOS ?</a>
+        </li>
     
     </ul>
 </nav>
@@ -159,19 +170,23 @@
               <div>
                 
   <p><a href="https://colab.research.google.com/github/saulomaia/datascience/blob/master/series_temporais/series_temporais_1.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p><strong>O QUE SÃO SÉRIES TEMPORAIS ?</strong></p>
+<div class="section" id="o-que-sao-series-temporais">
+<h1><strong>O QUE SÃO SÉRIES TEMPORAIS ?</strong><a class="headerlink" href="#o-que-sao-series-temporais" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <ul class="simple">
 <li><p>Séries temporais são uma sequência de observações registradas em intervalos de tempo regulares;</p></li>
 <li><p>Coleção de variáveis aleatórias de acordo com a ordem que elas são obtidas no tempo.</p></li>
 </ul>
-<p><strong>POR QUE SÃO DIFERENTES DE OUTROS PROBLEMAS DE DATA SCIENCE ?</strong></p>
+<div class="section" id="por-que-sao-diferentes-de-outros-problemas-de-data-science">
+<h2><strong>POR QUE SÃO DIFERENTES DE OUTROS PROBLEMAS DE DATA SCIENCE ?</strong><a class="headerlink" href="#por-que-sao-diferentes-de-outros-problemas-de-data-science" title="Permalink to this headline">¶</a></h2>
 <hr class="docutils" />
 <ul class="simple">
 <li><p>Por muitas vezes, hã uma dependência dos dados em relação ao tempo. Ou seja, ao alterar a ordem, isso pode alterar o significado dos dados;</p></li>
 <li><p>Por isso, fazer previsões em séries temporais usando, por exemplo, técnicas de regressão não é um bom approach.</p></li>
 </ul>
-<p><strong>QUAIS SÃO OS OBJETIVOS ?</strong></p>
+</div>
+<div class="section" id="quais-sao-os-objetivos">
+<h2><strong>QUAIS SÃO OS OBJETIVOS ?</strong><a class="headerlink" href="#quais-sao-os-objetivos" title="Permalink to this headline">¶</a></h2>
 <hr class="docutils" />
 <ul class="simple">
 <li><p>Identificar padrões, ou seja, identificar a natureza de um fenômeno representado pela sequência de observações;</p></li>
@@ -189,6 +204,8 @@
 <span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
 <span class="n">register_matplotlib_converters</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>

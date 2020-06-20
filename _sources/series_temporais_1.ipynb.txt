@@ -17,7 +17,7 @@
     "id": "DH_sANjtry_-"
    },
    "source": [
-    "**O QUE SÃO SÉRIES TEMPORAIS ?**\n",
+    "## **O QUE SÃO SÉRIES TEMPORAIS ?**\n",
     "\n",
     "---\n",
     "\n",
@@ -27,7 +27,7 @@
     "*   Coleção de variáveis aleatórias de acordo com a ordem que elas são obtidas no tempo.\n",
     "\n",
     "\n",
-    "**POR QUE SÃO DIFERENTES DE OUTROS PROBLEMAS DE DATA SCIENCE ?**\n",
+    "### **POR QUE SÃO DIFERENTES DE OUTROS PROBLEMAS DE DATA SCIENCE ?**\n",
     "\n",
     "---\n",
     "\n",
@@ -37,7 +37,7 @@
     "*   Por isso, fazer previsões em séries temporais usando, por exemplo, técnicas de regressão não é um bom approach.\n",
     "\n",
     "\n",
-    "**QUAIS SÃO OS OBJETIVOS ?**\n",
+    "### **QUAIS SÃO OS OBJETIVOS ?**\n",
     "\n",
     "---\n",
     "\n",
