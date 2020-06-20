@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Como importar Time Series em Python &#8212; Time Series</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/mystnb.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .secondtoggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Técnicas de Forecasting para Séries Temporais" href="series_temporais_2.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Time Series</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="intro.html">Welcome to your Jupyter Book</a>
+  </li>
+  <li class="active">
+    <a href="">Como importar Time Series em Python</a>
+  </li>
+  <li class="">
+    <a href="series_temporais_2.html">Técnicas de Forecasting para Séries Temporais</a>
+  </li>
+  <li class="">
+    <a href="series_temporais_3.html">Revisão Séries Estacionárias</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="_sources/series_temporais_1.ipynb.txt"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Source interaction buttons -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+            <div class="dropdown-buttons">
+                
+                <a class="binder-button" href="https://mybinder.org/v2/gh/ExecutableBookProject/jupyter-book/master?urlpath=tree/series_temporais_1.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip" data-placement="left"><img class="binder-button-logo" src="_static/images/logo_binder.svg" alt="Interact on binder">Binder</button></a>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/saulomaia/datascience/blob/master/series_temporais/series_temporais_1.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p><strong>O QUE SÃO SÉRIES TEMPORAIS ?</strong></p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Séries temporais são uma sequência de observações registradas em intervalos de tempo regulares;</p></li>
+<li><p>Coleção de variáveis aleatórias de acordo com a ordem que elas são obtidas no tempo.</p></li>
+</ul>
+<p><strong>POR QUE SÃO DIFERENTES DE OUTROS PROBLEMAS DE DATA SCIENCE ?</strong></p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Por muitas vezes, hã uma dependência dos dados em relação ao tempo. Ou seja, ao alterar a ordem, isso pode alterar o significado dos dados;</p></li>
+<li><p>Por isso, fazer previsões em séries temporais usando, por exemplo, técnicas de regressão não é um bom approach.</p></li>
+</ul>
+<p><strong>QUAIS SÃO OS OBJETIVOS ?</strong></p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Identificar padrões, ou seja, identificar a natureza de um fenômeno representado pela sequência de observações;</p></li>
+<li><p>Fazer previsões usando modelos estatísticos de qualquer variável que possa ser acompanhada e coletada ao longo do tempo:</p>
+<ul>
+<li><p>Preço diário de ações</p></li>
+<li><p>População anual</p></li>
+<li><p>Vendas trimestrais</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title</span>
+<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
+<span class="n">register_matplotlib_converters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="como-importar-time-series-em-python">
+<h1><strong>Como importar Time Series em Python</strong><a class="headerlink" href="#como-importar-time-series-em-python" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># importar pacotes e setar configurações de plots</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="p">;</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">()</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># url do dataset</span>
+<span class="n">dataset_path</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/saulomaia/datascience/master/series_temporais/datasets/electricity_consumption/Electric_Production.csv&quot;</span>
+
+<span class="c1"># importar o csv para um dataframe</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">)</span>
+
+<span class="c1"># ver as 5 primeiras entradas</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATE</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>01-01-1985</td>
+      <td>72.5052</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>02-01-1985</td>
+      <td>70.6720</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>03-01-1985</td>
+      <td>62.4502</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>04-01-1985</td>
+      <td>57.4714</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05-01-1985</td>
+      <td>55.3151</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># [ANTES] converter tipo da coluna DATE em datetime</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[ANTES]&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">DATE</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ANTES]
+</pre></div>
+</div>
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0    01-01-1985
+1    02-01-1985
+2    03-01-1985
+3    04-01-1985
+4    05-01-1985
+Name: DATE, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># [DEPOIS] converter tipo da coluna DATE em datetime</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[DEPOIS]&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">DATE</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2">-%Y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[DEPOIS]
+</pre></div>
+</div>
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0   1985-01-01
+1   1985-02-01
+2   1985-03-01
+3   1985-04-01
+4   1985-05-01
+Name: DATE, dtype: datetime64[ns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># converter DATE para datetime e associar ao index do dataframe</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">DATE</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%m-</span><span class="si">%d</span><span class="s2">-%Y&quot;</span><span class="p">)</span>
+
+<span class="c1"># eliminar a coluna DATE</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;DATE&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># ver as primeiras 5 entradas</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <th>DATE</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1985-01-01</th>
+      <td>72.5052</td>
+    </tr>
+    <tr>
+      <th>1985-02-01</th>
+      <td>70.6720</td>
+    </tr>
+    <tr>
+      <th>1985-03-01</th>
+      <td>62.4502</td>
+    </tr>
+    <tr>
+      <th>1985-04-01</th>
+      <td>57.4714</td>
+    </tr>
+    <tr>
+      <th>1985-05-01</th>
+      <td>55.3151</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="visualizar-series-temporais">
+<h1><strong>Visualizar Séries Temporais</strong><a class="headerlink" href="#visualizar-series-temporais" title="Permalink to this headline">¶</a></h1>
+<p><strong>COMPONENTES DE UMA SÉRIE TEMPORAL</strong></p>
+<hr class="docutils" />
+<ol class="simple">
+<li><p>Tendência</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Direção geral em que algo está se desenvolvendo ou mudando. Ex: tendência de crescimento ou decrescimento.
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>Sazonalidade</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Qualquer mudança ou padrão previsível em uma série temporal que seja recorrente ou se repita ao longo de um determinado período de tempo. Ex: estações, temporadas, repetição, frequência...
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotar gráfico de consumo de eletricidade</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Value</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/series_temporais_1_11_0.png" src="_images/series_temporais_1_11_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="decompondo-series-temporais">
+<h1><strong>Decompondo séries temporais</strong><a class="headerlink" href="#decompondo-series-temporais" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>É possível decompor uma série temporal se você considerar a série como uma combinação aditiva ou multiplicativa dos seus componentes.</p>
+<p>A biblioteca stats from statsmodels.tsa.seasonal import seasonal_decompose</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># salvar a decomposicao em result</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># plotar a decomposicao</span>
+<span class="c1">#result.plot();</span>
+
+<span class="c1"># plotar maior</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">,</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">result</span><span class="o">.</span><span class="n">observed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">trend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">seasonal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/series_temporais_1_14_0.png" src="_images/series_temporais_1_14_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analise-exploratoria-e-extracao-de-features">
+<h1><strong>Análise exploratória e extração de features</strong><a class="headerlink" href="#analise-exploratoria-e-extracao-de-features" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ferroviaria_dataset</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/saulomaia/datascience/master/series_temporais/datasets/companhia_ferroviaria/trem.csv&quot;</span>
+
+<span class="c1"># importar os dados da empresa ferroviária</span>
+<span class="n">df_trem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ferroviaria_dataset</span><span class="p">)</span>
+
+<span class="c1"># ver as 5 primeiras entradas</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Datetime</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>25-08-2012 00:00</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>25-08-2012 01:00</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>25-08-2012 02:00</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>25-08-2012 03:00</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>25-08-2012 04:00</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># converter a coluna Datetime em tipo datetime; </span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">-%m-%Y %H:%M&quot;</span><span class="p">)</span>
+
+<span class="c1"># plotar gráfico</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Datetime&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/series_temporais_1_17_0.png" src="_images/series_temporais_1_17_0.png" />
+</div>
+</div>
+<p><strong>Hipóteses</strong>:</p>
+<ul class="simple">
+<li><p>Pessoas viajam mais durante a semana.</p></li>
+<li><p>Há horários de pico por causa das indas e vindas do trabalho.</p></li>
+<li><p>Há períodos do mês onde a demanda por transporte é maior.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># criar features para cada período</span>
+<span class="n">df_trem</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">df_trem</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">df_trem</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+<span class="n">df_trem</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">df_trem</span><span class="p">[</span><span class="s1">&#39;day_of_week&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_trem</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># verificar as 5 primeiras entradas</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Datetime</th>
+      <th>Count</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>day_of_week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>2012-08-25 00:00:00</td>
+      <td>8</td>
+      <td>2012</td>
+      <td>8</td>
+      <td>25</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2012-08-25 01:00:00</td>
+      <td>2</td>
+      <td>2012</td>
+      <td>8</td>
+      <td>25</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2012-08-25 02:00:00</td>
+      <td>6</td>
+      <td>2012</td>
+      <td>8</td>
+      <td>25</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2012-08-25 03:00:00</td>
+      <td>2</td>
+      <td>2012</td>
+      <td>8</td>
+      <td>25</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>2012-08-25 04:00:00</td>
+      <td>2</td>
+      <td>2012</td>
+      <td>8</td>
+      <td>25</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p><strong>Pessoas viajam mais durante a semana</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># converter as variáveis em 0 ou 1</span>
+<span class="n">df_trem</span><span class="p">[</span><span class="s1">&#39;weekend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df_trem</span><span class="o">.</span><span class="n">day_of_week</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df_trem</span><span class="o">.</span><span class="n">day_of_week</span> <span class="o">==</span> <span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;weekend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># verificar os valores final de semana x semana</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">weekend</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0    13056
+1     5232
+Name: weekend, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotar os valores final de semana x semana</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;weekend&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Count</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f9ede022400&gt;
+</pre></div>
+</div>
+<img alt="_images/series_temporais_1_24_1.png" src="_images/series_temporais_1_24_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Há horários de pico por causa das indas e vindas do trabalho.</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotar os valores em função do horário</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;hour&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Count</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/series_temporais_1_26_0.png" src="_images/series_temporais_1_26_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Há períodos do ano onde a demanda por transporte é maior.</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotar os valores em função dos meses</span>
+<span class="n">df_trem</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Count</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/series_temporais_1_28_0.png" src="_images/series_temporais_1_28_0.png" />
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">Welcome to your Jupyter Book</a>
+    <a class='right-next' id="next-link" href="series_temporais_2.html" title="next page"><strong>Técnicas de Forecasting para Séries Temporais</strong></a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Saulo Maia<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>
